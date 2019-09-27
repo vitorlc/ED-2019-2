@@ -2,11 +2,11 @@
 
 void imprimeNaturais(int prim, int ult);
 
-void main(){
+int main(){
     int n = 1, m = 1;
-
     scanf("%d", &m);
     imprimeNaturais(n, m);
+    return 0;
 }
 
 void imprimeNaturais (int prim, int ult){

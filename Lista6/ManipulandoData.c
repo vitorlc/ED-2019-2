@@ -61,17 +61,86 @@ char * imprimeData (Data d, char * formato);
 
 
 int main (){
-    Data *data = NULL;
 
-    data = criaData(6,11,1111);
+    Data *data_ptr = criaData(1,1,2011);
+    printf("%d/%d/%d", data_ptr->dia, data_ptr->mes, data_ptr->ano);
+    
+    Data *dataCopia = copiaData(*data_ptr);
+    printf("\n%d/%d/%d", dataCopia->dia, dataCopia->mes, dataCopia->ano);
 
-    printf("%d", *data);
+    liberaData(dataCopia);
+
+    Data *dataSoma = somaDiasData(*data_ptr, 10);
+    printf("\nSoma: %d/%d/%d", dataSoma->dia, dataSoma->mes, dataSoma->ano);
+
+    Data *dataSubtrair = subtrairDiasData(*data_ptr, 2);
+    printf("\nSubtrair: %d/%d/%d", dataSubtrair->dia, dataSubtrair->mes, dataSubtrair->ano);
 
     return 0;
 };
 
-Data * criaData (unsigned int dia, unsigned int mes, unsigned int ano){
-    Data *data= malloc(sizeof(Data));
-    scanf ("%d %d %d", &data.dia, &data.mes, &data.ano);
-    return data;
+Data *criaData (unsigned int dia, unsigned int mes, unsigned int ano){
+    Data *data_ptr = malloc(sizeof(Data));
+    if (data_ptr != NULL) {
+        data_ptr->dia = dia;
+        data_ptr->mes = mes;
+        data_ptr->ano = ano;
+        return data_ptr; // Retorno ponteiro
+    }
+};
+
+Data * copiaData (Data d){
+    Data *dataCopia= (Data*) malloc(sizeof(Data));
+    if (dataCopia != NULL) {
+        dataCopia->dia = d.dia;
+        dataCopia->mes = d.mes;
+        dataCopia->ano = d.ano;
+        return dataCopia;
+    }
+}
+
+void liberaData (Data * d){
+    if (d != NULL) {
+	    free(d);
+	 }
+};
+
+Data * somaDiasData (Data d, unsigned int dias){
+    Data *soma = (Data*) malloc(sizeof(Data));
+    if(d.dia + dias < 30){
+        soma->dia= d.dia + dias;
+        soma->mes=d.mes;
+        soma->ano=d.ano;
+    }else{
+        soma->dia= (d.dia + dias) - 30;
+        if(d.mes+1 < 12){
+            soma->mes=d.mes+1;
+            soma->ano=d.ano;
+        }
+        else{
+            soma->mes=1;
+            soma->ano=d.ano+1;
+        }
+    }
+    return soma;
+};
+
+Data * subtrairDiasData (Data d, unsigned int dias){
+    Data *subtrair = (Data*) malloc(sizeof(Data));
+    if((d.dia - dias) >= 0){
+        subtrair->dia= (30 - dias)+d.dia;
+        if(d.mes-1<=0){
+            subtrair->mes=12;
+            subtrair->ano=d.ano-1;
+        }else {
+            subtrair->mes=d.mes-1;
+            subtrair->ano=d.ano;
+        }
+    }
+    else{
+        subtrair->dia= d.dia-dias;
+        subtrair->mes=d.mes;
+        subtrair->ano=d.ano;
+    }
+    return subtrair;
 };

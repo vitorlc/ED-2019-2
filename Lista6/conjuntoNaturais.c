@@ -468,7 +468,7 @@ int destroiConjunto(Conjunto *c1)
 
 int main()
 {
-
+    int n;
     Conjunto *c1 = criaConjunto();
     Conjunto *c2 = criaConjunto();
     Conjunto *c3 = criaConjunto();
@@ -481,17 +481,6 @@ int main()
     insereElementoConjunto(c1, 2);
     insereElementoConjunto(c1, 3);
 
-    printf("conjunto das partes de c1: ");
-    conjuntoPartes(c1);
-
-    printf("tamanho c1: %d \n", tamanhoConjunto(c1));
-
-    printf("Conjunto em ordem Crescente: ");
-    mostraConjunto(c1, "CRESCENTE");
-
-    printf("Conjunto em ordem Decrescente: ");
-    mostraConjunto(c1, "DECRESCENTE");
-
     insereElementoConjunto(c2, 3);
     insereElementoConjunto(c2, 4);
     insereElementoConjunto(c2, 5);
@@ -500,25 +489,166 @@ int main()
     insereElementoConjunto(c3, 1);
     insereElementoConjunto(c3, 2);
     insereElementoConjunto(c3, 3);
-
+    
     insereElementoConjunto(c4, 4);
     insereElementoConjunto(c4, 5);
 
-    printf("diferenca entre o conjunto c1 e c2: ");
-    c7 = diferenca(c1, c2);
-    for (int i = 0; i < c7->comprimento; i++)
+    int opcao;
+    do
     {
-        printf("%d, ", c7->elementos[i]);
+        printf(" \n =======> Opcoes: ");
+        printf(" \n 1. Conjunto das Partes" );
+        printf(" \n 2. Tamanho dos Conjuntos");
+        printf(" \n 3. Conjuntos em ordem crescente");
+        printf(" \n 4. Conjuntos em ordem decrescente");
+        printf(" \n 5. Diferencas entre os Conjuntos");
+        printf(" \n 6. Interseccao entre os Conjuntos");
+        printf(" \n 7. Qtd de elementos maior/menor que o nº informado");
+        printf(" \n 0. Finalizar Programa ");
+        scanf("\n%d%*c", &opcao);
+        switch(opcao)
+        {
+            case 1:
+                printf("\nConjunto das partes de c1: ");
+                conjuntoPartes(c1);
+                printf("\nConjunto das partes de c2: ");
+                conjuntoPartes(c2);
+                printf("\nConjunto das partes de c3: ");
+                conjuntoPartes(c3);
+                printf("\nConjunto das partes de c4: ");
+                conjuntoPartes(c4);
+            break;
+            case 2:
+                printf("\nTamanho c1: %d \n", tamanhoConjunto(c1));
+                printf("Tamanho c1: %d \n", tamanhoConjunto(c2));
+                printf("Tamanho c1: %d \n", tamanhoConjunto(c3));
+                printf("Tamanho c1: %d \n", tamanhoConjunto(c4));
+            break;
+            case 3:
+                printf("\nConjunto C1 em ordem crescente: ");
+                mostraConjunto(c1, "CRESCENTE");
+                printf("Conjunto C2 em ordem crescente: ");
+                mostraConjunto(c2, "CRESCENTE");
+                printf("Conjunto C3 em ordem crescente: ");
+                mostraConjunto(c3, "CRESCENTE");
+                printf("Conjunto C4 em ordem crescente: ");
+                mostraConjunto(c4, "CRESCENTE");
+            break;   
+            case 4:
+                printf("\nConjunto C1 em ordem decrescente: ");
+                mostraConjunto(c1, "DECRESCENTE");
+                printf("Conjunto C2 em ordem decrescente: ");
+                mostraConjunto(c2, "DECRESCENTE");
+                printf("Conjunto C3 em ordem decrescente: ");
+                mostraConjunto(c3, "DECRESCENTE");
+                printf("Conjunto C4 em ordem decrescente: ");
+                mostraConjunto(c4, "DECRESCENTE");
+            break;
+            case 5:
+                printf("Diferenca entre o conjunto c1 e c2: ");
+                c7 = diferenca(c1, c2);
+                for (int i = 0; i < c7->comprimento; i++)
+                {
+                    printf("%d, ", c7->elementos[i]);
+                }
+                printf("\n");
+                printf("Diferenca entre o conjunto c2 e c3: ");
+                c7 = diferenca(c2, c3);
+                for (int i = 0; i < c7->comprimento; i++)
+                {
+                    printf("%d, ", c7->elementos[i]);
+                }
+                printf("\n");
+                printf("Diferenca entre o conjunto c3 e c4: ");
+                c7 = diferenca(c3, c4);
+                for (int i = 0; i < c7->comprimento; i++)
+                {
+                    printf("%d, ", c7->elementos[i]);
+                }
+                printf("\n");
+                printf("Diferenca entre o conjunto c1 e c4: ");
+                c7 = diferenca(c1, c4);
+                for (int i = 0; i < c7->comprimento; i++)
+                {
+                    printf("%d, ", c7->elementos[i]);
+                }
+                printf("\n");
+                printf("Diferenca entre o conjunto c2 e c4: ");
+                c7 = diferenca(c2, c4);
+                for (int i = 0; i < c7->comprimento; i++)
+                {
+                    printf("%d, ", c7->elementos[i]);
+                }
+                printf("\n");
+                printf("Diferenca entre o conjunto c1 e c3: ");
+                c7 = diferenca(c1, c3);
+                for (int i = 0; i < c7->comprimento; i++)
+                {
+                    printf("%d, ", c7->elementos[i]);
+                }
+                printf("\n");   
+            break;
+            case 6:
+                printf("interseccao de c1 e c2: ");
+                c6 = interseccao(c1, c2);
+                for (int i = 0; i < c6->comprimento; i++)
+                {
+                    printf("%d, ", c6->elementos[i]);
+                }
+                printf("\n");
+                printf("interseccao de c2 e c3: ");
+                c6 = interseccao(c2, c3);
+                for (int i = 0; i < c6->comprimento; i++)
+                {
+                    printf("%d, ", c6->elementos[i]);
+                }
+                printf("\n");
+                printf("interseccao de c1 e c3: ");
+                c6 = interseccao(c1, c3);
+                for (int i = 0; i < c6->comprimento; i++)
+                {
+                    printf("%d, ", c6->elementos[i]);
+                }
+                printf("\n");
+                printf("interseccao de c3 e c4: ");
+                c6 = interseccao(c3, c4);
+                for (int i = 0; i < c6->comprimento; i++)
+                {
+                    printf("%d, ", c6->elementos[i]);
+                }
+                printf("\n");
+                printf("interseccao de c2 e c4: ");
+                c6 = interseccao(c2, c4);
+                for (int i = 0; i < c6->comprimento; i++)
+                {
+                    printf("%d, ", c6->elementos[i]);
+                }
+                printf("\n");
+                printf("interseccao de c1 e c4: ");
+                c6 = interseccao(c1, c4);
+                for (int i = 0; i < c6->comprimento; i++)
+                {
+                    printf("%d, ", c6->elementos[i]);
+                }
+                printf("\n");
+               
+            break;
+            case 7:
+            printf("\nDigite o numero: ");
+            scanf("%d", &n);
+            printf("Qtd de elementos do conjunto C1 que sao maiores que %d : %d\n",n, maior(c1, n));
+            printf("Qtd de elementos do conjunto C2 que sao maiores que %d : %d\n",n, maior(c2, n));
+            printf("Qtd de elementos do conjunto C3 que sao maiores que %d : %d\n",n, maior(c3, n));
+            printf("Qtd de elementos do conjunto C4 que sao maiores que %d : %d\n",n, maior(c4, n));
+            printf("Qtd de elementos do conjunto C1 que sao menores que %d : %d\n",n, menor(c1, n));
+            printf("Qtd de elementos do conjunto C2 que sao menores que %d : %d\n",n, menor(c2, n));
+            printf("Qtd de elementos do conjunto C3 que sao menores que %d : %d\n",n, menor(c3, n));
+            printf("Qtd de elementos do conjunto C4 que sao menores que %d : %d\n",n, menor(c4, n));
+            break;
+        }
     }
-    printf("\n");
-
-    printf("interseccao de c2 e c3: ");
-    c6 = interseccao(c2, c3);
-    for (int i = 0; i < c6->comprimento; i++)
-    {
-        printf("%d, ", c6->elementos[i]);
-    }
-    printf("\n");
+    while(opcao!=0);
+    
 
     printf("verificando se 7 pertence a c2: ");
     pertenceConjunto(c2, 7);

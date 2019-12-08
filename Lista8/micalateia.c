@@ -5,7 +5,7 @@
 typedef struct contato Contato;
 struct contato{
     char nome[10];
-    int telefone;
+    char telefone[10];
     int qtd_ligacao;
     Contato *proxContato;
 };
@@ -16,7 +16,7 @@ Contato* lista = NULL; //lista vazia
 Contato* criaContato();
 
 //Inserir novo contato
-Contato* insereContato(Contato *prox, char nome[], int telefone, int qtd_ligacao);
+Contato* insereContato(Contato *prox, char nome[], char telefone[], int qtd_ligacao);
 
 //Remover contato da lista
 void removerContato(Contato *lista, char nome[]);
@@ -33,7 +33,7 @@ Contato* buscarContato(Contato* Lista, char nome[]);
 
 int main (){
     char tipo, nome[10]; 
-    int telefone = 0; 
+    char telefone[20]; 
     int qtd_ligacao = 0;
 
     // strcpy(nome, "Nome1");
@@ -61,7 +61,7 @@ int main (){
         {
             case 'I':
             printf("\nDigite o nome, telefone e qtd ligacao: \n");
-            scanf("%s %d %d", &nome, &telefone, &qtd_ligacao);
+            scanf("%s %s %d", &nome, &telefone, &qtd_ligacao);
             lista = insereContato(lista ,nome, telefone, qtd_ligacao);
             break;
 
@@ -90,11 +90,11 @@ Contato* criaContato(){
     return contato;
 }
 
-Contato* insereContato(Contato *Lista, char nome[], int telefone, int qtd_ligacao){
+Contato* insereContato(Contato *Lista, char nome[], char telefone[], int qtd_ligacao){
     Contato *contato = criaContato(); 
 
     strcpy(contato->nome,nome);
-    contato->telefone = telefone;
+    strcpy(contato->telefone, telefone);
     contato->qtd_ligacao = qtd_ligacao;
     contato->proxContato = NULL;
 
@@ -152,7 +152,8 @@ void registraLigacao(Contato *Lista, char nome[]){
 void imprimir(Contato *Lista){
     Contato* aux = Lista;
     while(aux !=NULL){
-         printf("\n\nEndereco: %p \nNome: %s \nTelefone: %d \nQtd ligacao: %d \nProx: %p",aux, aux->nome, aux->telefone, aux->qtd_ligacao, aux->proxContato);
-         aux=aux->proxContato;
+        //  printf("\n\nEndereco: %p \nNome: %s \nTelefone: %d \nQtd ligacao: %d \nProx: %p",aux, aux->nome, aux->telefone, aux->qtd_ligacao, aux->proxContato);
+        printf("\n%s - %s %d",aux->nome, aux->telefone, aux->qtd_ligacao);
+        aux=aux->proxContato;
     }
 }

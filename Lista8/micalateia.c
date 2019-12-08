@@ -22,7 +22,7 @@ Contato* insereContato(Contato *prox, char nome[], int telefone, int qtd_ligacao
 void removerContato(Contato *lista, char nome[]);
 
 //Registrar quem da lista de contatos existente, fez uma ligação
-void registraLigacao(char nome);
+void registraLigacao(Contato *Lista, char nome[]);
 
 //Ordenar lista por quem ligou mais vezes
 void ordenaListaQtdLigacao(Contato *c);
@@ -36,51 +36,51 @@ int main (){
     int telefone = 0; 
     int qtd_ligacao = 0;
 
-    strcpy(nome, "Nome1");
-    lista = insereContato(lista, nome, 111111111, 4);
-    strcpy(nome, "Nome2");
-    lista = insereContato(lista, nome, 222222222, 3);
-    strcpy(nome, "Nome3");
-    lista = insereContato(lista, nome, 333333333, 2);
-    strcpy(nome, "Nome4");
-    lista = insereContato(lista, nome, 444444444, 1);
-    strcpy(nome, "Nome5");
-    lista = insereContato(lista, nome, 555555555, 5);
-    imprimir(lista);
-
     // strcpy(nome, "Nome1");
-    // removerContato(lista, nome);
+    // lista = insereContato(lista, nome, 111111111, 4);
+    // strcpy(nome, "Nome2");
+    // lista = insereContato(lista, nome, 222222222, 3);
+    // strcpy(nome, "Nome3");
+    // lista = insereContato(lista, nome, 333333333, 2);
+    // strcpy(nome, "Nome4");
+    // lista = insereContato(lista, nome, 444444444, 1);
+    // strcpy(nome, "Nome5");
+    // lista = insereContato(lista, nome, 555555555, 5);
+    // imprimir(lista);
+
+    // // strcpy(nome, "Nome1");
+    // // removerContato(lista, nome);
 
     // printf("\n\n NOVA LISTA \n\n");
     // imprimir(lista);
-    // printf("\n\n TEMP: %s %d %d", temp->nome, temp->telefone, temp->qtd_ligacao);
 
-    // do{
-    //     tipo = getchar();
-        
-    //     // scanf("%s %d %d", &nome, &telefone, &qtd_ligacao);
-    //     // printf("%c %s %d %d",tipo, nome, telefone, qtd_ligacao);
-    //     switch(tipo)
-    //     {
-    //         case 'I':
-    //         printf("\nINSERE\n");
-    //         scanf("%s %d %d", &nome, &telefone, &qtd_ligacao);
-    //         lista = insereContato(lista ,nome, telefone, qtd_ligacao);
-    //         break;
+    do{
+        printf("Digite uma das opcoes abaixo: \nI - Para inserir um contato\nL - Para registrar uma ligacao\nR - Para remover Contato\nF- Para terminar a sessao\n");
+        scanf("%c", &tipo);
+        switch(tipo)
+        {
+            case 'I':
+            printf("\nDigite o nome, telefone e qtd ligacao: \n");
+            scanf("%s %d %d", &nome, &telefone, &qtd_ligacao);
+            lista = insereContato(lista ,nome, telefone, qtd_ligacao);
+            break;
 
-    //         case 'R':
-    //         printf("\nREMOVE");
-    //         break;
+            case 'R':
+            printf("\nDigite o nome para remover da Lista: \n");
+            scanf("%s", &nome);
+            removerContato(lista, nome);
+            break;
 
-    //         case 'L':
-    //         printf("\nLIGAÇÃO");
-    //         break;
+            case 'L':
+            printf("\nDigite o nome para registar uma ligacao: \n");
+            scanf("%s", &nome);
+            registraLigacao(lista, nome);
+            break;
 
-    //     }
-    // }while(tipo!='F');
+        }
+    }while(tipo!='F');
     
-    // imprimir(lista);
-
+    imprimir(lista);
 
     return 0;
 };
@@ -144,12 +144,9 @@ void removerContato(Contato *Lista, char nome[]){
     free(temp);
 }
 
-void registraLigacao(char nome){
-
-}
-
-void ordenaListaQtdLigacao(Contato *Lista){
-
+void registraLigacao(Contato *Lista, char nome[]){
+    Contato *temp = buscarContato(lista, nome);
+    temp->qtd_ligacao = temp->qtd_ligacao +1;
 }
 
 void imprimir(Contato *Lista){

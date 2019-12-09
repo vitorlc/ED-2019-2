@@ -4,8 +4,8 @@
 
 typedef struct contato Contato;
 struct contato{
-    char nome[10];
-    char telefone[10];
+    char nome[15];
+    char telefone[20];
     int qtd_ligacao;
     Contato *proxContato;
 };
@@ -32,7 +32,7 @@ void imprimir(Contato *Lista);
 Contato* buscarContato(Contato* Lista, char nome[]);
 
 int main (){
-    char tipo, nome[10]; 
+    char tipo, nome[15]; 
     char telefone[20]; 
     int qtd_ligacao = 0;
 
@@ -137,7 +137,6 @@ void registraLigacao(Contato *Lista, char nome[]){
 void imprimir(Contato *Lista){
     Contato* aux = Lista;
     while(aux !=NULL){
-        printf("\n%s \n\n", aux->nome);
         printf("\n%s - %s %d", aux->nome, aux->telefone, aux->qtd_ligacao);
         aux=aux->proxContato;
     }

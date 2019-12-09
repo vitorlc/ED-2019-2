@@ -12,20 +12,20 @@ Fila * adicionarPessoasFila(Fila *fila, int identificador);
 
 Fila* buscarPessoa(Fila* Lista, int identificador);
 
-void removerPessoaFila(Fila *fila, int identificador);
+Fila* removerPessoaFila(Fila *fila, int identificador);
 
 void imprimirFila(Fila *fila);
 
 int main(){
     Fila *InicioFila = NULL;
-    int qtd_pessoas= 0, qtd_deixaram=0, i, j;
+    int qtd_pessoas= 0, qtd_deixaram=0, i, j, k;
 
     scanf("%d", &qtd_pessoas);
     int identificadores[qtd_pessoas];
 
-    for(i = 1;i <=qtd_pessoas; i++){
-        scanf("%d", &identificadores[i]);
-        InicioFila = adicionarPessoasFila(InicioFila, identificadores[i]);
+    for(k = 1;k <=qtd_pessoas; k++){
+        scanf("%d", &identificadores[k]);
+        InicioFila = adicionarPessoasFila(InicioFila, identificadores[k]);
     }
 
 
@@ -38,8 +38,8 @@ int main(){
     }
     for(i = 1;i <=qtd_pessoas; i++){
         for(j = 1;j <=qtd_deixaram; j++){
-            if(identificadores[i]==identificadores_deixaram[j]){
-                removerPessoaFila(InicioFila, identificadores_deixaram[i]);
+            if(identificadores[i] == identificadores_deixaram[j]){
+                InicioFila = removerPessoaFila(InicioFila, identificadores_deixaram[j]);
             }
         }
     }
@@ -77,16 +77,23 @@ Fila* buscarPessoa(Fila* Lista, int identificador){
 }
 
 
-void removerPessoaFila(Fila *fila, int identificador){
+Fila* removerPessoaFila(Fila *fila, int identificador){
     Fila* temp = buscarPessoa(fila, identificador);
 
     Fila* anterior;
     anterior = fila;
-    while (anterior->prox != temp ){
-        anterior = anterior->prox;
+    if (anterior == temp){
+        fila = anterior->prox;
+        free(temp);
+        return fila;
+    }else {
+        while (anterior->prox != temp ){
+            anterior = anterior->prox;
+        }
+        anterior->prox = temp->prox;
+        free(temp);
+        return fila;
     }
-    anterior->prox = temp->prox;
-    free(temp);
 }
 
 void imprimirFila(Fila *fila){
@@ -94,6 +101,7 @@ void imprimirFila(Fila *fila){
     while(aux !=NULL){
         // printf("\n\nEndereco: %p\n Valor: %d \nProx: %p", aux,aux->identificador, aux->prox);
         printf("%d ",aux->identificador);
+        // printf("\n\nEndereco: %p \nIdentificador:%d \nProx: %p", aux, aux->identificador, aux->prox);
         aux=aux->prox;
     }
     printf("\n");

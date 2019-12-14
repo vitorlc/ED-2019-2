@@ -11,8 +11,8 @@ int main (){
     printf("===========PONTEIROS===========\n");
     printf("> Valor da variavel c: %d\n", c);
     printf("> Endereco da variavel c: %d\n", &c);
-    printf("> Valor do ponteiro pt: %d\n", *pt);
-    printf("> Endereco da variavel c pelo pontiro pt: %d\n", pt);
+    printf("> Valor da variavel c pelo pt: %d\n", *pt);
+    printf("> Valor do ponteiro pt: %d\n", pt);
     printf("> Endereco da ponteiro pt: %d\n", &pt);
 
     hora();
@@ -37,6 +37,6 @@ void hora (){
     depois->minuto = 20;
     depois->segundo = 20;
 
-    printf("\n%i:%i:%i", agora.hora, agora.minuto, agora.segundo);
+    printf("\n%i:%i:%i", depois->hora, agora.minuto, agora.segundo);
 
 }
